@@ -1,0 +1,26 @@
+import sympy as sp
+
+x, lam = sp.symbols('x lam')
+
+f = x**2
+g = 2 - x
+   # constraint g <= 0
+
+L = f + lam*g
+
+eq1 = sp.diff(L, x)
+eq2 = sp.diff(L, lam)
+
+solutions = sp.solve([eq1, eq2], (x, lam), dict=True)
+
+print("Possible solutions:")
+print(solutions)
+
+for sol in solutions:
+    x_val = sol[x]
+    lam_val = sol[lam]
+
+    print("\nOptimal Solution:")
+    print("x =", x_val)
+    print("lambda =", lam_val)
+    print("Minimum Value =", f.subs(x, x_val))
